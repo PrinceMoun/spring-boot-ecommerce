@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 @Table(name="applications")
 public class Application {
 	
-	//@Column(name="related_offer")
-	//private String relatedOffer;
+	@Column(name="related_offer")
+	private String relatedOffer;
 	
 	@Id
 	@Column(name="candidate_email")
@@ -28,18 +28,21 @@ public class Application {
 	@Column(name="application_status")
 	private String applicationStatus;
 
+
 	//@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name ="related_offer"/*,nullable = false, updatable = false*/)
-	@JsonIgnore
 	//@JoinColumn(name ="related_offer", referencedColumnName = "job_title")
 	//@JsonBackReference
-	private Offer offers;
+	/*
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name ="related_offer")
+	@JsonIgnore
 
+	private Offer offers;
+	*/
 
 	@Override
 	public String toString() {
-		return "Application [offers=" + offers + ", candidateEmail=" + candidateEmail + ", resumeText="
+		return "Application [relatedOffer=" + relatedOffer + ", candidateEmail=" + candidateEmail + ", resumeText="
 				+ resumeText + ", applicationStatus=" + applicationStatus + "]";
 	}
 	

@@ -7,11 +7,7 @@ import javax.swing.text.html.parser.Entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.Quovantis.domain.repository.ApplicationRepository;
 import com.Quovantis.entity.Application;
@@ -40,10 +36,10 @@ public class ApplicationController {
 		// ResponseEntity.ok("getApplications called");
 	}
 
-	@GetMapping("/{offer}")
-	public ResponseEntity getApplicationsByOffer() {
-
-		return ResponseEntity.ok("getApplicationsByOffer calledd");
+	@GetMapping("/{application}")
+	public ResponseEntity getApplicationsByOffer(@PathVariable("application") String application) {
+		Application application1 = applicationRepository.findById(application).get();
+		return ResponseEntity.ok(application1);
 	}
 
 	@PostMapping(path = "/postApplication", consumes = "application/json", produces = "application/json")

@@ -41,7 +41,7 @@ public class Offer {
 	private int numberOfApplication;
 
 	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "relatedOffer")
-	@OneToMany(mappedBy = "offers", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "relatedOffer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	//@Column(nullable = false)
 	//@JsonManagedReference
 	private List<Application> allApplicattion;
