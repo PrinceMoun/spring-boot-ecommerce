@@ -36,9 +36,11 @@ public class OfferController {
 		return ResponseEntity.ok(offer);
 }
 
-@PostMapping()
-public ResponseEntity	createOffers(){
-		return ResponseEntity.ok("post called");
+@PostMapping(path="/postOffer")
+public ResponseEntity createOffers(@RequestBody Offer offer){
+	System.out.println(offer.toString());
+		final Offer offer1 = offerRepos.save(offer);
+		return ResponseEntity.ok(offer1);
 	}
 
 @GetMapping("/{offerId}")

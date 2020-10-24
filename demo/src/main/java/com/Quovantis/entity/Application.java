@@ -1,10 +1,9 @@
 package com.Quovantis.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,8 +15,8 @@ import lombok.NoArgsConstructor;
 @Table(name="applications")
 public class Application {
 	
-	@Column(name="related_offer")
-	private String relatedOffer;
+	//@Column(name="related_offer")
+	//private String relatedOffer;
 	
 	@Id
 	@Column(name="candidate_email")
@@ -29,9 +28,18 @@ public class Application {
 	@Column(name="application_status")
 	private String applicationStatus;
 
+	//@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name ="related_offer"/*,nullable = false, updatable = false*/)
+	@JsonIgnore
+	//@JoinColumn(name ="related_offer", referencedColumnName = "job_title")
+	//@JsonBackReference
+	private Offer offers;
+
+
 	@Override
 	public String toString() {
-		return "Application [relatedOffer=" + relatedOffer + ", candidateEmail=" + candidateEmail + ", resumeText="
+		return "Application [offers=" + offers + ", candidateEmail=" + candidateEmail + ", resumeText="
 				+ resumeText + ", applicationStatus=" + applicationStatus + "]";
 	}
 	

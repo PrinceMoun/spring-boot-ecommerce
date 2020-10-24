@@ -1,15 +1,16 @@
 package com.Quovantis.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.AllArgsConstructor;
@@ -33,10 +34,17 @@ public class Offer {
 	private String jobTitle;
 	
 	@Column(name = "start_date")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date startDate;
 	
 	@Column(name = "number_of_application")
 	private int numberOfApplication;
+
+	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "relatedOffer")
+	@OneToMany(mappedBy = "offers", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	//@Column(nullable = false)
+	//@JsonManagedReference
+	private List<Application> allApplicattion;
 
 	@Override
 	public String toString() {
